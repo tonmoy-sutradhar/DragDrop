@@ -9,8 +9,6 @@ import {
 } from "@dnd-kit/core";
 import Sidebar from "./components/Sidebar";
 import GridContainer from "./components/GridContainer";
-// import TrashBox from "./components/TrashBox";
-// import ComponentItem from "./components/ComponentItem";
 import Modal from "./components/Modal";
 import "./App.css";
 import TrashBox from "./components/TrashBox";
@@ -72,6 +70,227 @@ const sidebarItems = [
 ];
 
 function App() {
+  const [layout, setLayout] = useState(initialLayout);
+  const [activeId, setActiveId] = useState(null);
+  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [draggedItem, setDraggedItem] = useState(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    })
+  );
+
+  const generateId = (prefix) =>
+    `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+  const handleDragStart = useCallback((event) => {
+    setActiveId(event.active.id);
+
+    const active = event.active;
+    const sidebarItem = sidebarItems.find((item) => item.id === active.id);
+    if (sidebarItem) {
+      setDraggedItem({
+        type: sidebarItem.type,
+        fromSidebar: true,
+        data: sidebarItem,
+      });
+    } else {
+      setDraggedItem({
+        type: "component",
+        fromSidebar: false,
+        data: active,
+      });
+    }
+  }, []);
+
+  const handleDragEnd = useCallback(
+    (event) => {
+      const { active, over } = event;
+
+      setActiveId(null);
+      setDraggedItem(null);
+
+      if (!over) return;
+
+      // Handle dropping into trash
+      if (over.id === "trash") {
+        setLayout((prev) => removeItemFromLayout(prev, active.id));
+        return;
+      }
+
+      // Handle dropping from sidebar
+      if (active.id.startsWith("sidebar-")) {
+        const itemType = active.id.replace("sidebar-", "");
+
+        if (itemType === "row") {
+          // Add new row
+          const newRow = {
+            type: "ROW",
+            id: generateId("row"),
+            children: [],
+          };
+
+          // Find drop position
+          if (over.id.startsWith("row")) {
+            const rowIndex = layout.findIndex((row) => row.id === over.id);
+            const newLayout = [...layout];
+            newLayout.splice(rowIndex + 1, 0, newRow);
+            setLayout(newLayout);
+          } else {
+            setLayout([...layout, newRow]);
+          }
+        } else if (itemType === "column") {
+          // Add new column
+          const newColumn = {
+            type: "COLUMN",
+            id: generateId("column"),
+            height: 200,
+            children: [],
+          };
+
+          // Find target row
+          const targetRow = findRow(layout, over.id);
+          if (targetRow) {
+            const newLayout = JSON.parse(JSON.stringify(layout));
+            const row = findRowInLayout(newLayout, targetRow.id);
+            if (row) {
+              row.children.push(newColumn);
+              setLayout(newLayout);
+            }
+          }
+        } else {
+          // Add new component
+          const newComponent = {
+            type: "COMPONENT",
+            id: generateId("component"),
+            itemType,
+            content: `Some ${itemType}`,
+          };
+
+          // Find target column
+          const targetColumn = findColumn(layout, over.id);
+          if (targetColumn) {
+            const newLayout = JSON.parse(JSON.stringify(layout));
+            const column = findColumnInLayout(newLayout, targetColumn.id);
+            if (column) {
+              column.children.push(newComponent);
+              setLayout(newLayout);
+            }
+          }
+        }
+      }
+      // Handle reordering within grid
+      else if (
+        over.id.startsWith("column") &&
+        active.id.startsWith("component")
+      ) {
+        const newLayout = JSON.parse(JSON.stringify(layout));
+        const sourceColumn = findColumnContainingComponent(
+          newLayout,
+          active.id
+        );
+        const targetColumn = findColumnInLayout(newLayout, over.id);
+
+        if (sourceColumn && targetColumn) {
+          const componentIndex = sourceColumn.children.findIndex(
+            (c) => c.id === active.id
+          );
+          const [component] = sourceColumn.children.splice(componentIndex, 1);
+          targetColumn.children.push(component);
+          setLayout(newLayout);
+        }
+      }
+    },
+    [layout]
+  );
+
+  const removeItemFromLayout = (currentLayout, itemId) => {
+    const newLayout = JSON.parse(JSON.stringify(currentLayout));
+
+    const removeRecursive = (items) => {
+      const filtered = items.filter((item) => item.id !== itemId);
+
+      for (let item of filtered) {
+        if (item.children) {
+          item.children = removeRecursive(item.children);
+        }
+      }
+
+      return filtered;
+    };
+
+    return removeRecursive(newLayout);
+  };
+
+  const findRow = (layout, id) => {
+    for (let row of layout) {
+      if (row.id === id) return row;
+      if (row.children) {
+        const found = findRow(row.children, id);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
+
+  const findColumn = (layout, id) => {
+    for (let row of layout) {
+      for (let col of row.children) {
+        if (col.id === id) return col;
+        if (col.children) {
+          const found = findColumn(col.children, id);
+          if (found) return found;
+        }
+      }
+    }
+    return null;
+  };
+
+  const findRowInLayout = (layout, rowId) => {
+    return layout.find((row) => row.id === rowId);
+  };
+
+  const findColumnInLayout = (layout, columnId) => {
+    for (let row of layout) {
+      const column = row.children.find((col) => col.id === columnId);
+      if (column) return column;
+    }
+    return null;
+  };
+
+  const findColumnContainingComponent = (layout, componentId) => {
+    for (let row of layout) {
+      for (let column of row.children) {
+        const component = column.children.find((c) => c.id === componentId);
+        if (component) return column;
+      }
+    }
+    return null;
+  };
+
+  const handleItemClick = (itemId) => {
+    setSelectedItemId(itemId);
+    setIsModalOpen(true);
+  };
+
+  const handleResizeColumn = (columnId, newHeight) => {
+    const newLayout = JSON.parse(JSON.stringify(layout));
+    const column = findColumnInLayout(newLayout, columnId);
+    if (column) {
+      column.height = Math.max(100, newHeight);
+      setLayout(newLayout);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedItemId(null);
+  };
+
   return (
     <DndContext
       sensors={sensors}
