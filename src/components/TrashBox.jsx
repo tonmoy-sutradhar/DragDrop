@@ -10,10 +10,10 @@ const TrashBox = () => {
   return (
     <div
       ref={setNodeRef}
-      className={`p-6 border-2 ${
+      className={`p-6 border-2 border-red-300 ${
         isOver ? "border-red-500 bg-red-50" : "border-gray-300"
       } 
-        rounded-xl flex items-center justify-center gap-4 transition-all`}
+         flex items-center justify-center gap-4 transition-all w-40`}
     >
       <FaTrash
         className={`text-2xl ${isOver ? "text-red-500" : "text-gray-400"}`}
@@ -23,7 +23,7 @@ const TrashBox = () => {
           isOver ? "text-red-600" : "text-gray-600"
         }`}
       >
-        Drag items here to remove
+        TRASH
       </span>
     </div>
   );

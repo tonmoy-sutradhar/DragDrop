@@ -7,11 +7,12 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import Sidebar from "./components/Sidebar";
+// import SidebarItem from "./components/SidebarItem";
 import GridContainer from "./components/GridContainer";
 import Modal from "./components/Modal";
 import "./App.css";
 import TrashBox from "./components/TrashBox";
+import SidebarItem from "./components/Sidebar";
 
 const initialLayout = [
   {
@@ -300,11 +301,11 @@ function App() {
       <div className="min-h-screen bg-gray-50 p-4 md:p-6">
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Sidebar */}
-          <Sidebar items={sidebarItems} />
+          <SidebarItem items={sidebarItems} />
 
           {/* Main Content */}
           <div className="flex-1">
-            <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 mb-6">
+            <div className="bg-white border-2 border-gray-500  shadow-lg p-4 md:p-6 mb-6">
               <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
                 Drag & Drop Grid Layout
               </h1>
@@ -315,9 +316,9 @@ function App() {
               />
             </div>
 
-            {/* Trash Box */}
-            {/* <TrashBox /> */}
-            <TrashBox></TrashBox>
+            <div className="w-full flex justify-center mt-6">
+              <TrashBox></TrashBox>
+            </div>
 
             {/* JSON Data Display */}
             <div className="mt-6 bg-white rounded-xl shadow-lg p-4">
