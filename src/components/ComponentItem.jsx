@@ -67,23 +67,6 @@ const ComponentItem = ({ component, onClick }) => {
     data: { type: component.itemType },
   });
 
-  const getIcon = (type) => {
-    switch (type) {
-      case "input":
-        return "📝";
-      case "name":
-        return "👤";
-      case "email":
-        return "📧";
-      case "phone":
-        return "📱";
-      case "image":
-        return "🖼️";
-      default:
-        return "📦";
-    }
-  };
-
   const handleClick = (e) => {
     e.stopPropagation();
     onClick();
@@ -102,9 +85,6 @@ const ComponentItem = ({ component, onClick }) => {
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-lg">
-            {getIcon(component.itemType)}
-          </div>
           <div>
             <h4 className="font-medium text-gray-800 capitalize">
               {component.itemType}
