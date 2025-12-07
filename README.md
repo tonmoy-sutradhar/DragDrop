@@ -17,7 +17,7 @@ This project implements a fully interactive drag-and-drop grid layout in React, 
 <p align="center">
   <strong>Home Page</strong>  
   <br>
-  <img src="https://i.ibb.co.com/gMQxhxHc/Screenshot-115.png" alt="Home Page" width="80%" />
+  <img src="https://i.ibb.co.com/LzhTDn0q/drag-and-drop-img.png" alt="Home Page" width="80%" />
 </p>
 
 # Installation & Setup Guide
