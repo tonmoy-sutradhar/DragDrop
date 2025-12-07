@@ -1,4 +1,3 @@
-import React from "react";
 import { useDraggable } from "@dnd-kit/core";
 
 const SidebarItem = ({ items }) => {
@@ -7,7 +6,6 @@ const SidebarItem = ({ items }) => {
       <h2 className="text-xl font-bold text-center text-gray-800 mb-4">
         Sidebar
       </h2>
-      {/* <p className="text-sm text-gray-600 mb-6">Drag items to the grid</p> */}
 
       <div className="space-y-3 ">
         {items.map((item) => (
@@ -35,12 +33,8 @@ const DraggableItem = ({ item }) => {
         }`}
     >
       <div className="flex items-center gap-3 ">
-        {/* <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-lg">
-          {item.icon}
-        </div> */}
         <div>
           <h4 className="font-medium text-gray-800">{item.label}</h4>
-          {/* <p className="text-xs text-gray-500">Drag to add</p> */}
         </div>
       </div>
     </div>

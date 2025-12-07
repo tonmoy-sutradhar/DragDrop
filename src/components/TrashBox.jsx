@@ -1,4 +1,3 @@
-import React from "react";
 import { useDroppable } from "@dnd-kit/core";
 import { FaTrash } from "react-icons/fa";
 

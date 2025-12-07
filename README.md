@@ -1,16 +1,33 @@
-# React + Vite
+<img src="https://www.flaticon.com/free-icon/drag-and-drop_6214098" alt="Logo" width="80" height="80" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Drag & Drop GridLayout
 
-Currently, two official plugins are available:
+## Website Details
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Drag & Drop GridLayout
 
-## React Compiler
+This project implements a fully interactive drag-and-drop grid layout in React, allowing users to rearrange, insert, and remove items, rows, and columns dynamically. It also includes resizable columns, item-click modals, and real-time JSON structure updates for every layout change.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Authors
 
-## Expanding the ESLint configuration
+- [@Tonmoy Sutradhar](https://github.com/tonmoy-sutradhar)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Demo
+
+<p align="center">
+  <strong>Home Page</strong>  
+  <br>
+  <img src="https://i.ibb.co.com/gMQxhxHc/Screenshot-115.png" alt="Home Page" width="80%" />
+</p>
+
+# Installation & Setup Guide
+
+## Clone the Repository
+
+- git clone https://github.com/tonmoy-sutradhar/DragDrop.git
+- cd DragDrop
+- Run the project: npm run dev
+
+# Feedback
+
+If you have any feedback, please reach out to me on [LinkedIn](https://www.linkedin.com/in/tonmoy-sutradhar-013071280/).
