@@ -26,6 +26,7 @@ This project implements a fully interactive drag-and-drop grid layout in React, 
 
 - git clone https://github.com/tonmoy-sutradhar/DragDrop.git
 - cd DragDrop
+- Install dependency: npm i
 - Run the project: npm run dev
 
 # Feedback
