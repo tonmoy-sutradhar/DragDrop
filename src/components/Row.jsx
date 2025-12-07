@@ -56,22 +56,20 @@ const Row = ({ row, onItemClick, onResizeColumn }) => {
     <div
       ref={setNodeRef}
       onClick={handleRowClick}
-      className={`bg-gradient-to-r from-gray-50 to-white rounded-lg border ${
-        isOver ? "border-blue-300" : "border-gray-300"
+      className={`bg-gradient-to-r from-gray-50 to-white  border ${
+        isOver ? "border-blue-300" : "border-red-500"
       } 
         p-4 transition-all cursor-pointer hover:shadow-md`}
     >
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium text-gray-600 px-2 py-1 bg-gray-100 rounded">
-            Row: {row.id}
+            {row.id}
           </span>
         </div>
-        <div className="text-xs text-gray-400">
-          Columns: {row.children.length}
-        </div>
+        <div className="text-xs text-gray-400">{row.children.length}</div>
       </div>
-      <div className="flex gap-4 min-h-[100px]">
+      <div className="flex gap-4 min-h-[100px] ">
         {row.children.map((column) => (
           <Column
             key={column.id}

@@ -40,7 +40,7 @@ const DraggableItem = ({ item }) => {
         </div> */}
         <div>
           <h4 className="font-medium text-gray-800">{item.label}</h4>
-          <p className="text-xs text-gray-500">Drag to add</p>
+          {/* <p className="text-xs text-gray-500">Drag to add</p> */}
         </div>
       </div>
     </div>

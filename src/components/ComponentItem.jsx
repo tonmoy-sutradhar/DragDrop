@@ -78,10 +78,11 @@ const ComponentItem = ({ component, onClick }) => {
       {...attributes}
       {...listeners}
       onClick={handleClick}
-      className={`p-3 bg-gradient-to-r from-blue-100 to-blue-50 rounded-lg border border-blue-200 
-        cursor-move transition-all hover:shadow-md ${
-          isDragging ? "opacity-50" : ""
-        }`}
+      className={`p-2  
+    border-2 border-gray-500 border-dotted 
+    bg-white
+    ${isDragging ? "opacity-50" : ""}
+  `}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">

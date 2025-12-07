@@ -127,8 +127,8 @@ const Column = ({ column, onItemClick, onResizeColumn }) => {
       }}
       style={{ height: `${column.height}px` }}
       onClick={handleColumnClick}
-      className={`flex-1 min-w-[200px] bg-white rounded-lg border ${
-        isOver ? "border-green-300" : "border-gray-300"
+      className={`flex-1 min-w-[200px] bg-white  border ${
+        isOver ? "border-green-300" : "border-blue-600"
       } 
         p-3 relative transition-all ${
           isResizing ? "cursor-row-resize" : "cursor-pointer"
@@ -136,7 +136,7 @@ const Column = ({ column, onItemClick, onResizeColumn }) => {
     >
       <div className="flex items-center justify-between mb-3">
         <span className="text-sm font-medium text-gray-600 px-2 py-1 bg-gray-100 rounded">
-          Column: {column.id}
+          {column.id}
         </span>
       </div>
 
