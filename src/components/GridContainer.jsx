@@ -14,7 +14,6 @@ const GridContainer = ({ layout, onItemClick, onResizeColumn }) => {
       } 
          p-4 transition-all duration-200`}
     >
-      {/* rounded-lg */}
       {layout.length === 0 ? (
         <div className="h-full flex items-center justify-center text-gray-400 ">
           <div className="text-center ">

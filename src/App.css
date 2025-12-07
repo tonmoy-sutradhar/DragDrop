@@ -20,23 +20,6 @@ body {
   opacity: 0.5;
 }
 
-.resize-handle {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
-  cursor: row-resize;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.resize-handle:hover {
-  opacity: 1;
-}
-
-/* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -56,7 +39,6 @@ body {
   background: #555;
 }
 
-/* Custom styles for better UX */
 .grid-container {
   transition: all 0.3s ease;
 }
@@ -75,19 +57,16 @@ body {
   pointer-events: none;
 }
 
-/* Modal backdrop */
 .modal-backdrop {
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
 }
 
-/* JSON display styling */
 .json-display {
   font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
   tab-size: 2;
 }
 
-/* Hover effects for interactive elements */
 .interactive-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

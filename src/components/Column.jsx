@@ -38,7 +38,6 @@ const Column = ({ column, onItemClick, onResizeColumn }) => {
   };
 
   const handleColumnClick = (e) => {
-    // Only trigger if not clicking on resize handle
     if (!e.target.classList.contains("resize-handle")) {
       onItemClick(column.id, "column");
     }
@@ -75,16 +74,10 @@ const Column = ({ column, onItemClick, onResizeColumn }) => {
         ))}
       </div>
 
-      {/* Resize Handle */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-3 resize-handle bg-gradient-to-r from-transparent via-gray-400 to-transparent 
-          opacity-30 hover:opacity-100 cursor-row-resize transition-opacity rounded-b-lg"
+        className="absolute bottom-0 left-0 right-0 h-3   hover:opacity-100 cursor-row-resize transition-opacity rounded-b-lg"
         onMouseDown={handleMouseDown}
-        title="Drag to resize"
       />
-      <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 text-xs text-gray-500">
-        ↕
-      </div>
     </div>
   );
 };
