@@ -1,4 +1,4 @@
-<img src="https://www.flaticon.com/free-icon/drag-and-drop_6214098" alt="Logo" width="80" height="80" />
+<img src="https://cdn-icons-png.flaticon.com/512/6214/6214098.png" alt="Logo" width="80" height="80" />
 
 # Drag & Drop GridLayout
 
